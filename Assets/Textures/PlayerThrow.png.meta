@@ -1,0 +1,483 @@
+fileFormatVersion: 2
+guid: 823fd9eb1cea7c44294c8032bac96105
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7711065664438714855
+    second: PlayerThrow_0
+  - first:
+      213: -2064399359090204617
+    second: PlayerThrow_1
+  - first:
+      213: -1689898908342840478
+    second: PlayerThrow_2
+  - first:
+      213: 6836460483122944805
+    second: PlayerThrow_3
+  - first:
+      213: 4244576237672099939
+    second: PlayerThrow_4
+  - first:
+      213: 6465189095743220870
+    second: PlayerThrow_5
+  - first:
+      213: -3533504604456385378
+    second: PlayerThrow_6
+  - first:
+      213: -3474215152466330155
+    second: PlayerThrow_7
+  - first:
+      213: 4461575063956150674
+    second: PlayerThrow_8
+  - first:
+      213: -464449012694340278
+    second: PlayerThrow_9
+  - first:
+      213: 8977785221873191282
+    second: PlayerThrow_10
+  - first:
+      213: -2968591198044246425
+    second: PlayerThrow_11
+  - first:
+      213: -8782336111226480418
+    second: PlayerThrow_12
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 22
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PlayerThrow_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 14
+        width: 42
+        height: 21
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91e3b6712aaccf490800000000000000
+      internalID: -7711065664438714855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerThrow_1
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 14
+        width: 42
+        height: 21
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73062e678b7c953e0800000000000000
+      internalID: -2064399359090204617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerThrow_2
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 13
+        width: 26
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26397e575e54c88e0800000000000000
+      internalID: -1689898908342840478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerThrow_3
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 13
+        width: 26
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52bd989969cffde50800000000000000
+      internalID: 6836460483122944805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerThrow_4
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 13
+        width: 25
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36072847993c7ea30800000000000000
+      internalID: 4244576237672099939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerThrow_5
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 13
+        width: 25
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68ce0818a37f8b950800000000000000
+      internalID: 6465189095743220870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerThrow_6
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 13
+        width: 25
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e948b27984876fec0800000000000000
+      internalID: -3533504604456385378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerThrow_7
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 13
+        width: 36
+        height: 28
+      alignment: 9
+      pivot: {x: 0.32374063, y: -0.0007054465}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ddf6fbd9bb19cfc0800000000000000
+      internalID: -3474215152466330155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerThrow_8
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 13
+        width: 23
+        height: 28
+      alignment: 9
+      pivot: {x: 0.40103415, y: 0.00091484614}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 299d8d9d1e2baed30800000000000000
+      internalID: 4461575063956150674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerThrow_9
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 13
+        width: 33
+        height: 28
+      alignment: 9
+      pivot: {x: 0.27913135, y: 0.003254005}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4da21e6512fd89f0800000000000000
+      internalID: -464449012694340278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerThrow_10
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 13
+        width: 22
+        height: 28
+      alignment: 9
+      pivot: {x: 0.41510564, y: 0.00813491}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 279c08bc710879c70800000000000000
+      internalID: 8977785221873191282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerThrow_11
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 13
+        width: 25
+        height: 28
+      alignment: 9
+      pivot: {x: 0.47631592, y: 0.0000001362392}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76ea83d98027dc6d0800000000000000
+      internalID: -2968591198044246425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerThrow_12
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 13
+        width: 26
+        height: 29
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed8924076dfde1680800000000000000
+      internalID: -8782336111226480418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: fa2d3adb399fc504aa5242eefd5934be
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      PlayerThrow_0: -7711065664438714855
+      PlayerThrow_1: -2064399359090204617
+      PlayerThrow_10: 8977785221873191282
+      PlayerThrow_11: -2968591198044246425
+      PlayerThrow_12: -8782336111226480418
+      PlayerThrow_2: -1689898908342840478
+      PlayerThrow_3: 6836460483122944805
+      PlayerThrow_4: 4244576237672099939
+      PlayerThrow_5: 6465189095743220870
+      PlayerThrow_6: -3533504604456385378
+      PlayerThrow_7: -3474215152466330155
+      PlayerThrow_8: 4461575063956150674
+      PlayerThrow_9: -464449012694340278
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

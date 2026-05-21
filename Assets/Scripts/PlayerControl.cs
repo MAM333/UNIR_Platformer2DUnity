@@ -9,8 +9,12 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] InputActionReference move;
     [SerializeField] InputActionReference jump;
     [SerializeField] InputActionReference punch;
+    [SerializeField] InputActionReference dash;
+    [SerializeField] InputActionReference throwWeapon;
+    [SerializeField] InputActionReference interact;
 
     Life life;
+    PlayerInteract playerInteract;
 
     private void Awake()
     {
@@ -22,8 +26,12 @@ public class PlayerControl : MonoBehaviour
 
         jump.action.performed += OnJump;
         punch.action.performed += OnPunch;
+        dash.action.performed += OnDash;
+        interact.action.performed += OnInteract;
+        throwWeapon.action.performed += OnThrowWeapon;
 
         life = GetComponent<Life>();
+        playerInteract = GetComponent<PlayerInteract>();
     }
 
     private void OnEnable()
@@ -31,6 +39,9 @@ public class PlayerControl : MonoBehaviour
         move.action.Enable();
         jump.action.Enable();
         punch.action.Enable();
+        dash.action.Enable();
+        interact.action.Enable();
+        throwWeapon.action.Enable();
 
         life.onLifeDepleted.AddListener(OnLifeDepleted);
     }
@@ -45,6 +56,9 @@ public class PlayerControl : MonoBehaviour
         move.action.Disable();
         jump.action.Disable();
         punch.action.Disable();
+        dash.action.Disable();
+        interact.action.Disable();
+        throwWeapon.action.Disable();
 
         life.onLifeDepleted.RemoveListener(OnLifeDepleted);
     }
@@ -63,6 +77,21 @@ public class PlayerControl : MonoBehaviour
     private void OnPunch(InputAction.CallbackContext ctx)
     {
         characterController.Punch();
+    }
+
+    private void OnDash(InputAction.CallbackContext ctx)
+    {
+        characterController.Dash();
+    }
+
+    private void OnThrowWeapon(InputAction.CallbackContext ctx)
+    {
+        characterController.ThrowWeapon();
+    }
+
+    private void OnInteract(InputAction.CallbackContext ctx)
+    {
+        playerInteract.Interact(characterController);
     }
 
     private void OnLifeDepleted(float arg0)
