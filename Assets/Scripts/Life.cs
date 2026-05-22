@@ -1,14 +1,26 @@
 using System;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Life : MonoBehaviour
 {
-    [SerializeField] float startLife = 1f;
-    [SerializeField] float damagePerHit = 0.3f;
-    HurtCollider hurtCollider;
 
-    public UnityEvent<float, float> onLifeChanged;
+    [Header("Damage")]
+    [SerializeField] float startLife = 1f;
+    [SerializeField] float damagePerHit = 0.25f;
+    [SerializeField] float velocityJumpingBackX = 4f;
+    [SerializeField] float velocityJumpingBackY = 4f;
+    [SerializeField] float timeBeingMovingBack = 0.8f;
+    [SerializeField] float inmunityTime = 1.5f;
+    [SerializeField] float timeBetweenBlinks = 0.15f;
+    HurtCollider hurtCollider;
+    SpriteRenderer sprRenderer;
+    Rigidbody2D rb;
+
+    public UnityEvent<float, float, bool> onLifeChanged; // bool = damage
+    public UnityEvent onJumpBackFinish;
     public UnityEvent<float> onLifeDepleted;
 
     float currentLife;
@@ -16,6 +28,9 @@ public class Life : MonoBehaviour
     private void Awake()
     {
         hurtCollider = GetComponent<HurtCollider>();
+        sprRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+
         currentLife = startLife;
     }
 
@@ -30,12 +45,27 @@ public class Life : MonoBehaviour
         hurtCollider.onHitReceive.RemoveListener(OnHitReceived);
     }
 
-    private void OnHitReceived()
+    public void Restart()
     {
-        if (currentLife <= 0) return;
+        currentLife = startLife;
+        onLifeChanged.Invoke(currentLife, startLife, false);
+    }
+
+    bool inmune = false;
+    private void OnHitReceived(bool agressorIsRight, bool isDownAttack)
+    {
+        if (inmune || currentLife <= 0) return;
+
+        // Nunca deberia pasar esto puesto que la inmunidad sera superior al movimiento
+        // pero por si acaso
+        StopCoroutine(InmunityTime());
+        StartCoroutine(InmunityTime());
+
+        StopCoroutine(HitReceiveMovement(agressorIsRight, isDownAttack));
+        StartCoroutine(HitReceiveMovement(agressorIsRight, isDownAttack));
 
         currentLife -= damagePerHit;
-        onLifeChanged.Invoke(currentLife, startLife);
+        onLifeChanged.Invoke(currentLife, startLife, true);
         if (currentLife <= 0)
         {
             currentLife = 0;
@@ -43,9 +73,35 @@ public class Life : MonoBehaviour
         }
     }
 
-    internal void Restart()
+    IEnumerator InmunityTime()
     {
-        currentLife = startLife;
-        onLifeChanged.Invoke(currentLife, startLife);
+        inmune = true;
+
+        float timer = inmunityTime;
+        while (timer > 0)
+        {
+            yield return new WaitForSeconds(timeBetweenBlinks);
+            timer -= timeBetweenBlinks;
+            sprRenderer.enabled = !sprRenderer.enabled;
+        }
+
+        sprRenderer.enabled = true;
+
+        inmune = false;
+    }
+
+    IEnumerator HitReceiveMovement(bool agressorIsRight, bool isDownAttack)
+    {
+        if (!isDownAttack)
+        {
+            rb.linearVelocityX = (agressorIsRight ? -velocityJumpingBackX : velocityJumpingBackX);
+            rb.linearVelocityY = velocityJumpingBackY;
+        }
+
+        yield return new WaitForSeconds(timeBeingMovingBack / (isDownAttack ? 4 : 1));
+
+        rb.linearVelocityX = 0;
+
+        onJumpBackFinish.Invoke();
     }
 }

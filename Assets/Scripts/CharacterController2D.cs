@@ -1,5 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
+
+public enum BufferedAction
+{
+    None,
+    Jump,
+    Punch,
+    Dash,
+    ThrowWeapon
+}
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterController2D : MonoBehaviour
@@ -10,6 +20,7 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] float dashTime = 0.5f;
     [SerializeField] float dashVelocity = 3f;
     [SerializeField] float tirolinaVelocity = 12f;
+    [SerializeField] float inputBufferTime = 0.2f;
 
     [Header("Ground check")]
     [SerializeField] float groundCheckDistance = 0.2f;
@@ -18,30 +29,73 @@ public class CharacterController2D : MonoBehaviour
     [Header("Combat")]
     [SerializeField] Transform leftHit;
     [SerializeField] Transform rightHit;
+    [SerializeField] Transform downHit;
+    [SerializeField] float downHitUpVelocity = 5f;
+    [SerializeField] float deactivateHitDelay = 0.25f;
+    [SerializeField] float timeBetweenAttacks = 1f;
     [SerializeField] GameObject throwWeapon;
     [SerializeField] Transform rightThrowPos;
     [SerializeField] Transform leftThrowPos;
 
+    HitCollider downHitCollider;
+    Life life;
     Rigidbody2D rb;
     Animator anim;
     SpriteRenderer sprRenderer;
+    CapsuleCollider2D capsuleCollider;
+    BufferedAction bufferedAction = BufferedAction.None;
+    bool canAttack = true;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprRenderer = GetComponent<SpriteRenderer>();
+        life = GetComponent<Life>();
+        downHitCollider = downHit.gameObject.GetComponent<HitCollider>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
 
         leftHit.gameObject.SetActive(false);
         rightHit.gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        life.onLifeChanged.AddListener(OnLifeChanged);
+        life.onJumpBackFinish.AddListener(OnJumpBackFinish);
+        downHitCollider.hitSuccess.AddListener(DownHitSuccess);
+    }
+
+
+    float gravity = 0;
+    private void Start()
+    {
+        gravity = rb.gravityScale;
     }
 
     bool movingRight = true;
     bool canMove = true;
     bool canDash = true;
     const float moveThreshold = 0.1f;
+    bool lookingDown = false;
+    float bufferTimer = 0;
     void Update()
     {
+        if (bufferTimer > 0)
+        {
+            bufferTimer -= Time.deltaTime;
+
+            if (bufferedAction != BufferedAction.None)
+            {
+                if (canMove) ExecuteAction(bufferedAction);
+            }
+            else if (bufferTimer <= 0)
+            {
+                bufferTimer = 0;
+                bufferedAction = BufferedAction.None;
+            }
+        }
+
         if (!canMove) return;
 
         rb.linearVelocityX = rawMove.x * movementSpeed;
@@ -57,7 +111,37 @@ public class CharacterController2D : MonoBehaviour
         anim.SetBool("IsGrounded", grounded);
         if (!canDash && grounded) canDash = true;
 
+
+
         anim.SetBool("IsFalling", !grounded && rb.linearVelocityY < 0.1f);
+    }
+
+    private void OnDisable()
+    {
+        life.onLifeChanged.RemoveListener(OnLifeChanged);
+        life.onJumpBackFinish.RemoveListener(OnJumpBackFinish);
+        downHitCollider.hitSuccess.RemoveListener(DownHitSuccess);
+    }
+
+    private void OnLifeChanged(float arg1, float arg2, bool damage)
+    {
+        if (!damage) return;
+
+        canMove = false;
+        canDash = false;
+
+        FinishDashRoutine();
+    }
+
+    private void OnJumpBackFinish()
+    {
+        canMove = true;
+        canDash = true;
+    }
+
+    private void DownHitSuccess()
+    {
+        rb.linearVelocityY = downHitUpVelocity;
     }
 
     bool IsGrounded()
@@ -80,16 +164,60 @@ public class CharacterController2D : MonoBehaviour
             rb.linearVelocityY = jumpVelocity;
             movingInTirolina = false;
         }
+        else AddBufferAction(BufferedAction.Dash);
     }
 
     public void Punch()
     {
-        if (canMove) anim.SetTrigger("Punch");
+        if (canMove && canAttack)
+        {
+            if (IsGrounded() || !lookingDown) anim.SetTrigger("Punch");
+            else anim.SetTrigger("PunchDownAir");
+            StartCoroutine(AttacksCD());
+        }
+        else AddBufferAction(BufferedAction.Punch);
+    }
+
+    public void OnAnimationPunch()
+    {
+        if (sprRenderer.flipX)
+        {
+            leftHit.gameObject.SetActive(true);
+        }
+        else
+        {
+            rightHit.gameObject.SetActive(true);
+        }
+
+        Invoke(nameof(DeactivateHits), deactivateHitDelay);
+    }
+
+    public void OnAnimationDownPunch()
+    {
+        downHit.gameObject.SetActive(true);
+        Invoke(nameof(DeactivateHits), deactivateHitDelay);
+    }
+
+    void DeactivateHits()
+    {
+        leftHit.gameObject.SetActive(false);
+        rightHit.gameObject.SetActive(false);
+        downHit.gameObject.SetActive(false);
+    }
+
+    IEnumerator AttacksCD()
+    {
+        canAttack = false;
+
+        yield return new WaitForSeconds(timeBetweenAttacks);
+
+        canAttack= true;
     }
 
     public void Dash()
     {
         if (canDash) StartCoroutine(Dashing());
+        else AddBufferAction(BufferedAction.Dash);
     }
 
     IEnumerator Dashing()
@@ -104,7 +232,6 @@ public class CharacterController2D : MonoBehaviour
         float velocity = dashVelocity * (movingRight ? 1 : -1);
         rb.linearVelocityX = velocity;
 
-        float initGravity = rb.gravityScale;
         rb.linearVelocityY = 0;
         rb.gravityScale = 0;
 
@@ -117,20 +244,28 @@ public class CharacterController2D : MonoBehaviour
 
         canMove = true;
 
-        anim.SetBool("Dashing", false);
-
         rb.linearVelocityX -= velocity;
-        rb.gravityScale = initGravity;
 
-        if (throwingWeapon) scytheThrowMovement.FinishMovement();
+        FinishDashRoutine();
     }
 
-    float gravity = 0;
+    private void FinishDashRoutine()
+    {
+        StopCoroutine(Dashing());
+        anim.SetBool("Dashing", false);
+        if (throwingWeapon) scytheThrowMovement.FinishMovement();
+        rb.gravityScale = gravity;
+    }
+
     bool throwingWeapon = false;
     bool canDashAux = false;
     public void ThrowWeapon()
     {
-        if (!canMove) return;
+        if (!canMove)
+        {
+            AddBufferAction(BufferedAction.Dash);
+            return;
+        }
 
         canMove = false;
         throwingWeapon = true;
@@ -176,26 +311,6 @@ public class CharacterController2D : MonoBehaviour
         canDash = canDashAux;
     }
 
-    const float deactivateHitDelay = 0.25f;
-    public void OnAnimationPunch()
-    {
-        if (sprRenderer.flipX)
-        {
-            leftHit.gameObject.SetActive(true);
-        }
-        else
-        {
-            rightHit.gameObject.SetActive(true);
-        }
-        
-        Invoke(nameof(DeactivateHits), deactivateHitDelay);
-    }
-
-    void DeactivateHits()
-    {
-        leftHit.gameObject.SetActive(false);
-        rightHit.gameObject.SetActive(false);
-    }
 
     public bool Tirolina(Tirolina tirolina)
     {
@@ -225,8 +340,8 @@ public class CharacterController2D : MonoBehaviour
     }
 
     bool movingInTirolina = false;
-    float offset = 1.5f;
-    float timerTirolinaGround = 0.3f;
+    readonly float offset = 1.5f;
+    readonly float timerTirolinaGround = 0.3f;
     IEnumerator TirolineoMaximo(Tirolina tirolina)
     {
         canMove = false;
@@ -238,6 +353,7 @@ public class CharacterController2D : MonoBehaviour
         rb.linearVelocityY = 0;
         gravity = rb.gravityScale;
         rb.gravityScale = 0;
+        capsuleCollider.enabled = false;
 
         Transform tirolinaInitPos = movingRight ? tirolina.GetLeftObject() : tirolina.GetRightObject();
         Transform tirolinaFinalPos = movingRight ? tirolina.GetRightObject() : tirolina.GetLeftObject();
@@ -245,8 +361,6 @@ public class CharacterController2D : MonoBehaviour
         transform.position = GetClosestPoint(tirolinaInitPos.position, tirolinaFinalPos.position) - Vector3.up * 1.2f;
 
         Vector3 moveVector = ((tirolinaFinalPos.position - Vector3.up * 1.2f) - transform.position).normalized;
-        //Vector3 moveVector = Vector3.MoveTowards(transform.position, tirolinaFinalPos.position - Vector3.up * 1.2f, 1).normalized;
-        //moveVector = moveVector - transform.position
         rb.linearVelocityX = moveVector.x * tirolinaVelocity;
         rb.linearVelocityY = moveVector.y * tirolinaVelocity;
         
@@ -260,13 +374,42 @@ public class CharacterController2D : MonoBehaviour
             if (timer > 0)
             {
                 timer -= Time.deltaTime;
-                if (timer < 0) timer = 0;
+                if (timer < 0) 
+                { 
+                    timer = 0;
+                    capsuleCollider.enabled = true;
+                }
             }
         }
 
+        capsuleCollider.enabled = true;
         anim.SetBool("Hanged", false);
         rb.gravityScale = gravity;
         canMove = true;
         canDash = true;
+    }
+
+    public void LookingDown(bool looking)
+    {
+        lookingDown = looking;
+    }
+
+    private void AddBufferAction(BufferedAction action)
+    {
+        bufferedAction = action;
+        bufferTimer = inputBufferTime;
+    }
+
+    private void ExecuteAction(BufferedAction action)
+    {
+        switch (action)
+        {
+            case BufferedAction.Punch: Punch(); break;
+            case BufferedAction.Jump: Jump(); break;
+            case BufferedAction.Dash: Dash(); break;
+            case BufferedAction.ThrowWeapon: ThrowWeapon(); break;
+        }
+
+        bufferedAction = BufferedAction.None;
     }
 }

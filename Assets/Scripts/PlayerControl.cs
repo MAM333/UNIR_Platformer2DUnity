@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 public class PlayerControl : MonoBehaviour
@@ -12,7 +13,9 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] InputActionReference dash;
     [SerializeField] InputActionReference throwWeapon;
     [SerializeField] InputActionReference interact;
+    [SerializeField] InputActionReference lookDown;
 
+    Vector3 initPosition;
     Life life;
     PlayerInteract playerInteract;
 
@@ -23,6 +26,9 @@ public class PlayerControl : MonoBehaviour
         move.action.performed += OnMove;
         move.action.started += OnMove;
         move.action.canceled += OnMove;
+        lookDown.action.performed += OnLookDown;
+        lookDown.action.started += OnLookDown;
+        lookDown.action.canceled += OnLookDown;
 
         jump.action.performed += OnJump;
         punch.action.performed += OnPunch;
@@ -32,11 +38,13 @@ public class PlayerControl : MonoBehaviour
 
         life = GetComponent<Life>();
         playerInteract = GetComponent<PlayerInteract>();
+        initPosition = transform.position;
     }
 
     private void OnEnable()
     {
         move.action.Enable();
+        lookDown.action.Enable();
         jump.action.Enable();
         punch.action.Enable();
         dash.action.Enable();
@@ -54,6 +62,7 @@ public class PlayerControl : MonoBehaviour
     private void OnDisable()
     {
         move.action.Disable();
+        lookDown.action.Disable();
         jump.action.Disable();
         punch.action.Disable();
         dash.action.Disable();
@@ -96,13 +105,12 @@ public class PlayerControl : MonoBehaviour
 
     private void OnLifeDepleted(float arg0)
     {
-        gameObject.SetActive(false);
-        Invoke(nameof(Resurrect), 2f);
+        transform.position = initPosition;
     }
 
-    private void Resurrect()
+    private void OnLookDown(InputAction.CallbackContext ctx)
     {
-        gameObject.SetActive(true);
-        life.Restart();
+        Vector2 vec = ctx.ReadValue<Vector2>();
+        characterController.LookingDown(vec.y < 0);
     }
 }

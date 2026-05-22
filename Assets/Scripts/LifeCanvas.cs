@@ -19,7 +19,7 @@ public class LifeCanvas : MonoBehaviour
         life.onLifeDepleted.RemoveListener(OnLifeDepleted);
     }
 
-    private void OnLifeChanged(float currentLife, float startLife)
+    private void OnLifeChanged(float currentLife, float startLife, bool damage)
     {
         mask.fillAmount = currentLife / startLife;
     }
