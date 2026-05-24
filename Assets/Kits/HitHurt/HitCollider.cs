@@ -11,6 +11,7 @@ public class HitCollider : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && isAllyHit) return;
+        else if (collision.CompareTag("Enemy") && !isAllyHit) return;
 
         HurtCollider hit = collision.GetComponent<HurtCollider>();
         if (hit != null)

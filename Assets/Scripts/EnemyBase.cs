@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class EnemyBase : MonoBehaviour
 {
 
+    [Header("EnemyBaseAutomatic")]
     // Los hijos acceden
     public Rigidbody2D rb;
     public Transform player;

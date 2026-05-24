@@ -164,7 +164,7 @@ public class CharacterController2D : MonoBehaviour
             rb.linearVelocityY = jumpVelocity;
             movingInTirolina = false;
         }
-        else AddBufferAction(BufferedAction.Dash);
+        else AddBufferAction(BufferedAction.Jump);
     }
 
     public void Punch()
