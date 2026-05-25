@@ -17,13 +17,19 @@ public class EnemySpring : EnemyBase
         life.onJumpBackFinish.AddListener(OnJumpBackFinish);
     }
 
-    bool canMove = true;
+    bool canMove = false;
     bool jumpingBack = false;
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if (jumpingBack) return;
 
-        canMove = IsGrounded();
+        if (initialized)
+        {
+            canMove = IsGrounded();
+        }
+
     }
 
     protected override void OnDisable()
@@ -59,6 +65,8 @@ public class EnemySpring : EnemyBase
     float auxTimer = 0.7f;
     IEnumerator Move()
     {
+        SoundManager.instance.PlayBoingEnemy();
+
         float moveX = velocityX;
         float moveY = velocityY;
 

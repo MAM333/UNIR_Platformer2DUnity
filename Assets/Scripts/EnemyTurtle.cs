@@ -8,13 +8,17 @@ public class EnemyTurtle : EnemyBase
     public Transform bulletPointLeft;
     public bool right = false;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         spr.flipX = !right;
     }
 
     public void OnShootAnimation()
     {
+        if (!initialized) return;
+
         Vector3 spawnPos = (right ? bulletPointRight.position : bulletPointLeft.position);
         GameObject spike = Instantiate(pinchito, spawnPos, Quaternion.identity);
         Spike spikeScript = spike.GetComponent<Spike>();

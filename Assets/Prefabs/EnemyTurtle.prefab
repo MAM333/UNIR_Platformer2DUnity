@@ -168,9 +168,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyTurtle
   rb: {fileID: 0}
-  player: {fileID: 0}
   spr: {fileID: 0}
   life: {fileID: 0}
+  initialized: 0
+  player: {fileID: 0}
+  differenceInXToStartMoving: 14
   pinchito: {fileID: 313424210666428255, guid: 8db8eb78996241f4d91e4f1f67473bdb, type: 3}
   bulletPointRight: {fileID: 6410774035489180600}
   bulletPointLeft: {fileID: 4548955193120043749}
@@ -269,6 +271,7 @@ GameObject:
   - component: {fileID: 1659298545901144603}
   - component: {fileID: 3530782428680309378}
   - component: {fileID: 6313967822903800562}
+  - component: {fileID: 5604611373695736312}
   m_Layer: 0
   m_Name: PinchosSuperioresCollider
   m_TagString: Untagged
@@ -352,6 +355,21 @@ MonoBehaviour:
   isAllyHit: 0
   isDownAttack: 0
   hitSuccess:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5604611373695736312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2182915737611296506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c557e5d9fb443ad4b9afa0cfb2413c10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HurtCollider
+  onHitReceive:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &3014620844671399846

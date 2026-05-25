@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 867558101488853275}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.5299997, y: -3.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -135,9 +135,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpring
   rb: {fileID: 0}
-  player: {fileID: 0}
   spr: {fileID: 0}
   life: {fileID: 0}
+  initialized: 0
+  player: {fileID: 0}
+  differenceInXToStartMoving: 14
   velocityX: 3
   velocityY: 3
   groundCheckDistance: 0.2

@@ -40,12 +40,13 @@ public class PlayerInteract : MonoBehaviour
 
     public void Interact(CharacterController2D characterController)
     {
-        if (!canInteract) return;
+        bool moving = characterController.movingInTirolina;
+        if (!canInteract && !moving) return;
 
-        if (tirolina != null)
+        if (tirolina != null || moving)
         {
             bool done = characterController.Tirolina(tirolina);
-            //if (done) ShowButton(button.activeSelf);
+
         }
     }
 }

@@ -19,9 +19,9 @@ public class Life : MonoBehaviour
     SpriteRenderer sprRenderer;
     Rigidbody2D rb;
 
-    public UnityEvent<float, float, bool> onLifeChanged; // bool = damage
+    public UnityEvent<float, float, bool> onLifeChanged; // startLife currentLife damage
     public UnityEvent onJumpBackFinish;
-    public UnityEvent<float> onLifeDepleted;
+    public UnityEvent<float> onLifeDepleted; // start life
 
     float currentLife;
 
@@ -43,6 +43,13 @@ public class Life : MonoBehaviour
     private void OnDisable()
     {
         hurtCollider.onHitReceive.RemoveListener(OnHitReceived);
+    }
+
+    public void Kill()
+    {
+        currentLife = 0;
+        onLifeChanged.Invoke(currentLife, startLife, false);
+        onLifeDepleted.Invoke(startLife);
     }
 
     public void Restart()
@@ -92,6 +99,11 @@ public class Life : MonoBehaviour
 
     IEnumerator HitReceiveMovement(bool agressorIsRight, bool isDownAttack)
     {
+        if (velocityJumpingBackX == 0)
+        {
+            yield break;
+        } 
+
         if (!isDownAttack)
         {
             rb.linearVelocityX = (agressorIsRight ? -velocityJumpingBackX : velocityJumpingBackX);

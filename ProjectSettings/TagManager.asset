@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tirolina
   - Enemy
+  - Limit
   layers:
   - Default
   - TransparentFX

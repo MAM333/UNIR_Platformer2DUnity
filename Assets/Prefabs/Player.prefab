@@ -170,19 +170,20 @@ MonoBehaviour:
   movementSpeed: 6
   jumpVelocity: 14
   dashTime: 0.3
-  dashVelocity: 16
+  dashVelocity: 14
   tirolinaVelocity: 12
   inputBufferTime: 0.2
   groundCheckDistance: 0.2
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  wallCheckDistance: 0.77
   leftHit: {fileID: 4839248712416354390}
   rightHit: {fileID: 6576256538099252678}
   downHit: {fileID: 6697034013811360732}
-  downHitUpVelocity: 10
-  deactivateHitDelay: 0.25
-  timeBetweenAttacks: 0.5
+  downHitUpVelocity: 12
+  deactivateHitDelay: 0.05
+  timeBetweenAttacks: 0.25
   throwWeapon: {fileID: 3382813175950103398, guid: eab605a868ce1fc44871b22ad064f915, type: 3}
   rightThrowPos: {fileID: 3561671813611277968}
   leftThrowPos: {fileID: 8002872968301086523}
@@ -268,7 +269,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614520218031971984}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -305,7 +306,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614520218031971984}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
