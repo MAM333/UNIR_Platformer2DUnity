@@ -23,14 +23,17 @@ public class SceneManagement : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-        {
-            MusicManager.instance.PlayGameTheme();
-        } 
-        else
+        Scene act = SceneManager.GetActiveScene();
+        if (act.name == "MainMenu" || act.name == "FinalScene")
         {
             MusicManager.instance.PlayMainMenuTheme();
         }
+        else
+        {
+            MusicManager.instance.PlayGameTheme();
+        }
+
+        Time.timeScale = 1f;
     }
 
     private void OnDisable()
@@ -51,6 +54,11 @@ public class SceneManagement : MonoBehaviour
     public void GoToNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void GoToLevel(int level)
+    {
+        SceneManager.LoadScene(level);
     }
 
     private void OnRestart(InputAction.CallbackContext context)

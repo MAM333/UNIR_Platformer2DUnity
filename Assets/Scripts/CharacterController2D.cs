@@ -102,6 +102,7 @@ public class CharacterController2D : MonoBehaviour
         if (!canMove) return;
 
         rb.linearVelocityX = rawMove.x * movementSpeed;
+        rb.gravityScale = gravity;
 
         if (rawMove.x != 0) movingRight = (rawMove.x > 0);
 
@@ -175,10 +176,11 @@ public class CharacterController2D : MonoBehaviour
     {
         Vector2 check = (right ? Vector2.right : Vector2.left);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, check, wallCheckDistance, groundLayerMask);
-        RaycastHit2D hitUp = Physics2D.Raycast(transform.position + Vector3.up * 0.5f, check, wallCheckDistance, groundLayerMask);
+        RaycastHit2D hitUp = Physics2D.Raycast(transform.position + Vector3.up * 1.16f, check, wallCheckDistance, groundLayerMask);
 
 
         //Debug.DrawRay(transform.position, check * wallCheckDistance, Color.red);
+        //Debug.DrawRay(transform.position + Vector3.up * 1.16f, check * wallCheckDistance, Color.red);
 
         bool condition = hit && hit.collider != null;
         bool conditionUp = hitUp && hitUp.collider != null;
@@ -294,7 +296,7 @@ public class CharacterController2D : MonoBehaviour
     {
         StopCoroutine(Dashing());
         anim.SetBool("Dashing", false);
-        if (throwingWeapon) scytheThrowMovement.FinishMovement();
+        if (throwingWeapon && scytheThrowMovement != null) scytheThrowMovement.FinishMovement();
         rb.gravityScale = gravity;
     }
 
@@ -385,7 +387,7 @@ public class CharacterController2D : MonoBehaviour
     }
 
     public bool movingInTirolina = false;
-    readonly float offset = 1.5f;
+    //readonly float offset = 1.5f;
     readonly float timerTirolinaGround = 0.2f;
     readonly float timerTirolinaCollider = 0.4f;
     IEnumerator TirolineoMaximo(Tirolina tirolina)

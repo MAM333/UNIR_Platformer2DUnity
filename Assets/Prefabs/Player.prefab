@@ -173,6 +173,7 @@ MonoBehaviour:
   dashVelocity: 14
   tirolinaVelocity: 12
   inputBufferTime: 0.2
+  offsetTirolineo: 1.5
   groundCheckDistance: 0.2
   groundLayerMask:
     serializedVersion: 2
@@ -187,6 +188,7 @@ MonoBehaviour:
   throwWeapon: {fileID: 3382813175950103398, guid: eab605a868ce1fc44871b22ad064f915, type: 3}
   rightThrowPos: {fileID: 3561671813611277968}
   leftThrowPos: {fileID: 8002872968301086523}
+  movingInTirolina: 0
 --- !u!114 &1968438599553162682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Life
   startLife: 1
-  damagePerHit: 0.25
+  damagePerHit: 0.34
   velocityJumpingBackX: 8
   velocityJumpingBackY: 8
   timeBeingMovingBack: 0.5
