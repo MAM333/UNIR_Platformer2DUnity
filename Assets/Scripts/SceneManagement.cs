@@ -23,13 +23,18 @@ public class SceneManagement : MonoBehaviour
 
     private void Start()
     {
+
         Scene act = SceneManager.GetActiveScene();
         if (act.name == "MainMenu" || act.name == "FinalScene")
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             MusicManager.instance.PlayMainMenuTheme();
         }
         else
         {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             MusicManager.instance.PlayGameTheme();
         }
 

@@ -22,6 +22,7 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] float dashVelocity = 3f;
     [SerializeField] float tirolinaVelocity = 12f;
     [SerializeField] float inputBufferTime = 0.2f;
+    [SerializeField] float dashBufferTime = 1.0f;
     [SerializeField] float offsetTirolineo = 1.5f;
 
     [Header("Ground and wall check")]
@@ -90,7 +91,7 @@ public class CharacterController2D : MonoBehaviour
 
             if (bufferedAction != BufferedAction.None)
             {
-                if (canMove) ExecuteAction(bufferedAction);
+                if (canMove || canDash) ExecuteAction(bufferedAction);
             }
             else if (bufferTimer <= 0)
             {
@@ -464,7 +465,15 @@ public class CharacterController2D : MonoBehaviour
     private void AddBufferAction(BufferedAction action)
     {
         bufferedAction = action;
-        bufferTimer = inputBufferTime;
+        if (action == BufferedAction.Dash && throwingWeapon)
+        {
+            Debug.Log("Entro");
+            bufferTimer = dashBufferTime;
+        }
+        else
+        {
+            bufferTimer = inputBufferTime;
+        }
     }
 
     private void ExecuteAction(BufferedAction action)
