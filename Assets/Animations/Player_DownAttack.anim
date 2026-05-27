@@ -22,11 +22,11 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: -6097439309852992424, guid: 1a0b581dece79fa4b9791607a8c639fc, type: 3}
-    - time: 0.033333335
+    - time: 0.016666668
       value: {fileID: 8075518012776876207, guid: 1a0b581dece79fa4b9791607a8c639fc, type: 3}
-    - time: 0.083333336
+    - time: 0.033333335
       value: {fileID: 2911526725232025570, guid: 1a0b581dece79fa4b9791607a8c639fc, type: 3}
-    - time: 0.13333334
+    - time: 0.05
       value: {fileID: 6836453961446203337, guid: 1a0b581dece79fa4b9791607a8c639fc, type: 3}
     - time: 0.18333334
       value: {fileID: -9131361466249755577, guid: 1a0b581dece79fa4b9791607a8c639fc, type: 3}
@@ -85,7 +85,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.083333336
+  - time: 0.033333335
     functionName: OnAnimationDownPunch
     data: 
     objectReferenceParameter: {fileID: 0}

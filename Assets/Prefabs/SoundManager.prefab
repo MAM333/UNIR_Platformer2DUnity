@@ -57,16 +57,16 @@ MonoBehaviour:
   damageToEnemy: {fileID: 8300000, guid: 83b67dc6325c61f46bb46442e86022ac, type: 3}
   damageToBox: {fileID: 8300000, guid: 779e794f032542a44ad8d532f81f927f, type: 3}
   starBreaking: {fileID: 8300000, guid: 72ae9607902b7e849bb31985f22cf96d, type: 3}
-  dashVolume: 0.166
-  attackVolume: 0.166
+  dashVolume: 0.2
+  attackVolume: 0.2
   jumpVolume: 0.166
   throwAttackVolume: 0.166
   throwRecoverVolume: 0.166
-  boingEnemyVolume: 0.166
+  boingEnemyVolume: 0.14
   damageToPlayerVolume: 0.15
   damageToEnemyVolume: 0.166
   damageToBoxVolume: 0.166
-  starBreakingVolume: 0.166
+  starBreakingVolume: 0.14
   walk: {fileID: 6419499105249373456}
   tirolina: {fileID: 808038625133603098}
 --- !u!82 &6419499105249373456

@@ -183,7 +183,7 @@ MonoBehaviour:
   rightHit: {fileID: 6576256538099252678}
   downHit: {fileID: 6697034013811360732}
   downHitUpVelocity: 12
-  deactivateHitDelay: 0.05
+  deactivateHitDelay: 0.1
   timeBetweenAttacks: 0.25
   throwWeapon: {fileID: 3382813175950103398, guid: eab605a868ce1fc44871b22ad064f915, type: 3}
   rightThrowPos: {fileID: 3561671813611277968}

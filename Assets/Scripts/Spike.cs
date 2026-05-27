@@ -3,7 +3,7 @@ using UnityEngine;
 public class Spike : MonoBehaviour
 {
     [SerializeField] float velocityX;
-
+    public float timeToDestroy = 15f;
     SpriteRenderer spr;
     Rigidbody2D rb;
     Life life;
@@ -15,6 +15,12 @@ public class Spike : MonoBehaviour
         life = GetComponent<Life>();
     }
 
+    float timer = 0;
+    private void Start()
+    {
+        timer = timeToDestroy;
+    }
+
     private void OnEnable()
     {
         life.onLifeDepleted.AddListener(OnLifeDepleted);
@@ -24,6 +30,14 @@ public class Spike : MonoBehaviour
     {
         rb.linearVelocityX = (right ? velocityX : -velocityX);
         spr.flipX = !right;
+    }
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+        if (timer <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnDisable()
